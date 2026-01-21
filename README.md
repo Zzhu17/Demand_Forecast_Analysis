@@ -1,6 +1,5 @@
 
 # Demand_Forecast_Analysis
-=======
 # Demand Forecast Analysis (Business-Oriented)
 
 Status
@@ -201,7 +200,6 @@ Demand_Forecast_Analysis/
 - Adjust the SQL filter to include/exclude order statuses based on your business definition.
 - `scripts/04_demand_forecast.py` fills missing calendar days with 0 orders to preserve daily frequency.
 
-<<<<<<< HEAD
 ## Next Steps (Optional)
 - Add GMV and order item volume forecasts
 - Tag anomalies/holidays for more explainable volatility spikes
@@ -227,5 +225,3 @@ Future improvements may include:
 - Accuracy metrics are linked to operational risk
 - Trade-offs are explicitly discussed
 - Model complexity is secondary to business usability
->>>>>>> 664a4cc (Update)
->>>>>>> 70aabd1 (Update README.md)
