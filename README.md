@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Demand_Forecast_Analysis
 =======
 # E-Commerce Demand Analysis & Forecasting
@@ -139,4 +139,3 @@ Demand_Forecast_Analysis/
 ## Next Steps (Optional)
 - Add GMV and order item volume forecasts
 - Tag anomalies/holidays for more explainable volatility spikes
->>>>>>> 664a4cc (Update)
