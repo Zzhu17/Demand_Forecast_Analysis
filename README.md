@@ -1,10 +1,22 @@
 
 # Demand_Forecast_Analysis
 =======
-# E-Commerce Demand Analysis & Forecasting
+# Demand Forecast Analysis (Business-Oriented)
+
+Status
+- Demand forecasting pipeline complete
+- Model evaluation and error analysis implemented
+- Business interpretation and scenario analysis added
 
 ## Project Overview
-DA-style demand analysis for an e-commerce business. The goal is to understand historical demand behavior, quantify trend/seasonality/volatility, and produce a reasonable short-term forecast that can be turned into operational guidance. This project prioritizes clarity and business usefulness over model complexity.
+This project simulates a demand forecasting analysis workflow commonly used in e-commerce and supply chain planning. The goal is to understand historical demand behavior, quantify trend/seasonality/volatility, and produce a short-term forecast that can be translated into operational guidance. The priority is business usability over model complexity.
+
+## Business Context & Objective
+Demand forecasting here is not about maximizing model accuracy alone. The objective is to:
+- Support inventory planning
+- Reduce stockout risk
+- Control excess inventory and holding costs
+- Improve operational stability under seasonal demand patterns
 
 ## Analysis Direction (DA)
 - Understand demand evolution over time
@@ -20,12 +32,21 @@ DA-style demand analysis for an e-commerce business. The goal is to understand h
 - What is the short-term demand outlook (7/14/30 days)?
 - What does this imply for operations and logistics?
 
+## Forecasting Use Case
+The forecast is intended to support medium-term planning decisions, such as:
+- How much inventory to allocate for upcoming periods
+- How to prepare for seasonal demand spikes
+- How to balance service level against inventory cost
+
+The output is designed to be interpretable and stable enough for operational use.
+
 ## Data & KPI
 Source: Olist public dataset (orders table).
 - Grain: daily
 - KPI: daily order count
 - Key field: `order_purchase_timestamp`
 - Filtering: excludes `canceled` and `unavailable` orders (adjust if needed)
+No external demand signals (promotions/pricing) are assumed.
 
 Raw data: `raw/olist_orders_dataset.csv`
 
@@ -55,6 +76,21 @@ From `reports/insights.md`:
 - Strongest weekday: Tuesday (avg 181.1 orders)
 - Volatility change (7d std): 381.7%
 
+## Forecasting Approach
+Time-series forecasting models are trained on historical demand data. Model selection prioritizes:
+- Interpretability
+- Stability
+- Ease of operational integration
+
+Rather than optimizing for a single metric, the focus is on forecast behavior under different demand conditions.
+
+## Evaluation Metrics
+Forecast accuracy is evaluated using standard error metrics:
+- MAE
+- MAPE
+
+These metrics are used to compare forecast performance, not as the sole decision criterion.
+
 ## Forecast Summary
 Short-term expectations (from `reports/insights.md`):
 - 7d avg: ~300 orders/day
@@ -63,6 +99,35 @@ Short-term expectations (from `reports/insights.md`):
 
 Forecast output: `data/processed/forecast_output.csv`  
 Metrics: `reports/forecast_metrics.csv`
+
+## Forecast Error & Business Impact Mapping
+Forecast errors translate directly into business risks:
+
+| Forecast Error Type | Business Impact |
+| --- | --- |
+| Under-forecast | Stockouts, lost sales, reduced customer satisfaction |
+| Over-forecast | Excess inventory, higher holding costs, capital lock-up |
+
+As a result, forecasting decisions must consider error asymmetry, not just average accuracy.
+
+## Scenario Analysis
+To reflect real-world planning trade-offs, forecast results are interpreted under different scenarios:
+
+- Conservative Forecast  
+  Prioritizes stability and lower variance  
+  → Lower stockout risk, higher inventory holding cost
+
+- Aggressive Forecast  
+  More responsive to recent demand changes  
+  → Lower holding cost, higher risk of stockouts
+
+This framing mirrors how forecasts are discussed in operational planning meetings.
+
+## Business Implications
+- Forecasts should align with service level targets, not just accuracy metrics
+- Conservative forecasts may be preferred during peak seasons
+- More aggressive forecasts may be acceptable during stable demand periods
+- Forecast interpretation is as important as model selection
 
 ## Tableau Output
 Use CSVs in Tableau Public:
@@ -136,6 +201,31 @@ Demand_Forecast_Analysis/
 - Adjust the SQL filter to include/exclude order statuses based on your business definition.
 - `scripts/04_demand_forecast.py` fills missing calendar days with 0 orders to preserve daily frequency.
 
+<<<<<<< HEAD
 ## Next Steps (Optional)
 - Add GMV and order item volume forecasts
 - Tag anomalies/holidays for more explainable volatility spikes
+=======
+## Limitations & Next Steps
+- No real-time demand signals are included
+- Forecasts are evaluated offline
+
+Future improvements may include:
+- Incorporating external drivers (promotions, pricing)
+- Cost-weighted error metrics
+- Integration with inventory optimization models
+
+## Reproducibility
+- Data preparation: `scripts/01_eda_orders.py`
+- Trend/seasonality: `scripts/02_trend_seasonality.py`
+- Volatility: `scripts/03_volatility_analysis.py`
+- Forecasting: `scripts/04_demand_forecast.py`
+- Business insights: `scripts/05_business_insights.py`
+
+## Why This Reflects Real-World Practice
+- Forecasting is framed as decision support
+- Accuracy metrics are linked to operational risk
+- Trade-offs are explicitly discussed
+- Model complexity is secondary to business usability
+>>>>>>> 664a4cc (Update)
+>>>>>>> 70aabd1 (Update README.md)
